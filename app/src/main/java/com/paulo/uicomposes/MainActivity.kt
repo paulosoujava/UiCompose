@@ -38,6 +38,7 @@ import com.paulo.uicomposes.navigation.SetupNavGraph
 import com.paulo.uicomposes.ui.components.*
 import com.paulo.uicomposes.ui.textfields.CustomOutlineTextField
 import com.paulo.uicomposes.ui.theme.UiComposesTheme
+import com.paulo.uicomposes.welcome.Welcome
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterialApi::class)
@@ -45,7 +46,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             UiComposesTheme {
-                    LaunchedEffect()
+                  Welcome()
             }
         }
     }

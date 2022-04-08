@@ -40,6 +40,7 @@ import com.paulo.uicomposes.ui.calendar.ScrollableColumnDemo
 import com.paulo.uicomposes.ui.components.*
 import com.paulo.uicomposes.ui.textfields.CustomOutlineTextField
 import com.paulo.uicomposes.ui.theme.UiComposesTheme
+import com.paulo.uicomposes.youtube_tutorial.Profile
 
 
 class MainActivity : ComponentActivity() {
@@ -48,8 +49,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             UiComposesTheme {
+               // Profile()
                  // Welcome()
-               // ScrollableColumnDemo()
+                ScrollableColumnDemo()
 
             }
         }

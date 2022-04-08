@@ -1,17 +1,17 @@
 package com.paulo.uicomposes.ui.calendar
 
-import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -20,24 +20,61 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ScrollableColumnDemo() {
 
-
-    val calendar = Mock.get()
-    val grouped = calendar.groupBy { it.section }
-
+    val calendar = remember {
+        Mock.get().last() // ultimo ano
+    }
+    val grouped = calendar.history.groupBy { it.section }
     Surface(color = Color.Gray.copy(alpha = 0.1f)) {
-        LazyColumn {
-            grouped.forEach { (section, sectionTest) ->
-                var (dayOfWeek, numberFormatDayOfWeek) = section.split(" ")
-                stickyHeader {
-                    HeaderLeft(dayOfWeek, numberFormatDayOfWeek)
-                }
-                items(
-                    items = sectionTest,
-                    itemContent = {
-                        CardContentCalendar(it)
+        Column {
+            Header(calendar)
+            LazyColumn {
+                grouped.forEach { (section, sectionTest) ->
+                    var (dayOfWeek, numberFormatDayOfWeek) = section.split(" ")
+                    stickyHeader {
+                        HeaderLeft(dayOfWeek, numberFormatDayOfWeek)
                     }
-                )
+                    items(
+                        items = sectionTest,
+                        itemContent = {
+                            CardContentCalendar(it)
+                        }
+                    )
+                }
             }
+        }
+    }
+}
+
+@Composable
+fun Header(history: YearHistory) {
+    Row(
+        horizontalArrangement = Arrangement.Start,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+    ) {
+        IconButton(onClick = { }
+        ) {
+            Icon(
+                Icons.Default.ChevronLeft,
+                contentDescription = "content description",
+                tint = Color.Green
+            )
+        }
+        Text(
+            text = history.yaer,
+            color = Color.Gray,
+            fontSize = 16.sp
+        )
+
+        IconButton(onClick = {}
+        ) {
+            Icon(
+                Icons.Default.ChevronRight,
+                contentDescription = "content description",
+                tint = Color.Green
+            )
         }
     }
 }

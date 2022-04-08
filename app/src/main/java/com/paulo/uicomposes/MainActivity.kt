@@ -5,6 +5,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
@@ -35,10 +36,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.paulo.uicomposes.bottomNavigation.MainScreen
 import com.paulo.uicomposes.navigation.SetupNavGraph
+import com.paulo.uicomposes.ui.calendar.ScrollableColumnDemo
 import com.paulo.uicomposes.ui.components.*
 import com.paulo.uicomposes.ui.textfields.CustomOutlineTextField
 import com.paulo.uicomposes.ui.theme.UiComposesTheme
-import com.paulo.uicomposes.welcome.Welcome
+
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterialApi::class)
@@ -46,7 +48,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             UiComposesTheme {
-                  Welcome()
+                 // Welcome()
+               // ScrollableColumnDemo()
+
             }
         }
     }

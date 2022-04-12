@@ -12,8 +12,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -26,6 +31,37 @@ fun ScrollableColumnDemo() {
     val grouped = calendar.history.groupBy { it.section }
     Surface(color = Color.Gray.copy(alpha = 0.1f)) {
         Column {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.Red)
+            ) {
+                Text(
+                    text = "Pedidos de Serviços",
+                    modifier = Modifier.weight(1f).padding(10.dp)
+                )
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        Icons.Default.CalendarViewWeek,
+                        "contentDescription",
+                        tint = Color.White
+                    )
+                }
+                Divider(
+                    modifier = Modifier
+                        .size(height = 40.dp, width = 1.dp)
+                        .padding(top = 5.dp, bottom = 5.dp)
+                        .background(Color.Red)
+                )
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        Icons.Default.List,
+                        "contentDescription",
+                        tint = Color.White
+                    )
+                }
+            }
             Header(calendar)
             LazyColumn {
                 grouped.forEach { (section, sectionTest) ->
@@ -44,6 +80,7 @@ fun ScrollableColumnDemo() {
         }
     }
 }
+
 
 @Composable
 fun Header(history: YearHistory) {
@@ -120,34 +157,45 @@ fun CardContentCalendar(calendar: Test) {
                 .fillMaxWidth()
         ) {
             Row(
-                Modifier.padding(10.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
+                Modifier.padding(5.dp),
             ) {
-                Column {
-                    Text(
-                        text = "Serviço Solicitado",
-                        fontSize = 12.sp,
-                        color = Color.Gray,
-                        modifier = Modifier.padding(bottom = 5.dp)
-                    )
-                    Text(
-                        text = calendar.typeService,
-                        fontSize = 16.sp
-                    )
-
-                }
-                Column {
-                    Text(
-                        text = "Código do pedido",
-                        fontSize = 12.sp,
-                        color = Color.Gray,
-                        modifier = Modifier.padding(bottom = 5.dp)
-                    )
-                    Text(
-                        text = calendar.codeOfType,
-                        color = Color.Green
-                    )
-
+                Column(
+                    modifier = Modifier.padding(10.dp)
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ){
+                        Text(
+                            text = "Serviço Solicitado",
+                            fontSize = 12.sp,
+                            color = Color.Gray,
+                            textAlign = TextAlign.Start,
+                            modifier = Modifier.padding(8.dp).weight(1f)
+                        )
+                        Text(
+                            text = "Código do pedido",
+                            fontSize = 12.sp,
+                            color = Color.Gray,
+                            textAlign = TextAlign.End,
+                            modifier = Modifier.padding(5.dp).weight(1f)
+                        )
+                    }
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ){
+                        Text(
+                            text = calendar.typeService,
+                            textAlign = TextAlign.Start,
+                            modifier = Modifier.padding(8.dp).weight(1f),
+                            fontSize = 16.sp
+                        )
+                        Text(
+                            text = calendar.codeOfType,
+                            textAlign = TextAlign.End,
+                            modifier = Modifier.padding(8.dp).weight(1f),
+                            color = Color.Green
+                        )
+                    }
                 }
             }
         }

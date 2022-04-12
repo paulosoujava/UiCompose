@@ -44,6 +44,8 @@ import com.paulo.uicomposes.youtube_tutorial.Profile
 
 
 class MainActivity : ComponentActivity() {
+
+
     @OptIn(ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
